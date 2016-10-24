@@ -1,6 +1,6 @@
 <h1><img src="https://raw.githubusercontent.com/duboviy/minicache/master/logo.png" height=85 alt="logo" title="logo"> minicache</h1>
 
-Python memory caching utilities
+Python memory caching utilities for Python 2 and 3 versions, also PyPy.
 
 by [Eugene Duboviy](https://duboviy.github.io/)
 
@@ -33,6 +33,19 @@ Or from source use:
 python setup.py install
 ```
 
+## Supported python versions
+
+  * 2.7
+  * 3.3
+  * 3.4
+  * 3.5
+  * PyPy
+
+## PyPI
+
+* [Package](https://pypi.python.org/pypi/minicache)
+* [Documentation](https://pythonhosted.org/minicache/)
+
 ## Examples
 
 Basic usage
@@ -42,7 +55,7 @@ Basic usage
 False
 >>> cache.get('key', default='default')
 'default'
->>> cache.upsert('key', 'value')
+>>> cache.update('key', 'value')
 >>> cache.get('key')
 'value'
 >>> cache.disable()

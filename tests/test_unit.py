@@ -2,7 +2,7 @@ from minicache import cache
 
 
 def test_has_disabled():
-    cache.set('test_has_disabled', 'value')
+    cache.update('test_has_disabled', 'value')
     assert cache.has('test_has_disabled') is True
     cache.options.enabled = False
     assert cache.has('test_has_disabled') is False
@@ -11,15 +11,15 @@ def test_has_disabled():
 
 def test_set_disabled():
     cache.options.enabled = False
-    cache.set('test_set_disabled', 'value')
+    cache.update('test_set_disabled', 'value')
     assert cache.has('test_set_disabled') is False
     cache.options.enabled = True
-    cache.set('test_set_disabled', 'value')
+    cache.update('test_set_disabled', 'value')
     assert cache.has('test_set_disabled') is True
 
 
 def test_get_disabled():
-    cache.set('test_get_disabled', 'value')
+    cache.update('test_get_disabled', 'value')
     assert cache.get('test_get_disabled') == 'value'
     cache.options.enabled = False
     assert cache.get('test_get_disabled') is None
@@ -27,7 +27,7 @@ def test_get_disabled():
 
 
 def test_clear_disabled():
-    cache.set('test_clear_disabled', 'value')
+    cache.update('test_clear_disabled', 'value')
     cache.options.enabled = False
     cache.clear()
     cache.options.enabled = True
@@ -57,7 +57,7 @@ def test_this():
 
 
 def test_disable_no_clear():
-    cache.set('test_disable_no_clear', 'value')
+    cache.update('test_disable_no_clear', 'value')
     cache.disable(clear_cache=False)
     assert cache.has('test_disable_no_clear') is False
     cache.enable()

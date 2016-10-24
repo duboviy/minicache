@@ -27,29 +27,29 @@ def has(key):
     >>> from minicache import cache
     >>> cache.has('has?')
     False
-    >>> cache.set('has?', 'now')
+    >>> cache.update('has?', 'now')
     >>> cache.has('has?')
     True
     """
     _set_log_lvl()
-    logger.debug('has({})'.format(key))
+    logger.debug('has %s', key)
     return key in _CACHE.keys() and options.enabled
 
 
-def set(key, value):
-    """ Perform set key value on the cache
+def update(key, value):
+    """ Perform update key value on the cache
 
     >>> from minicache import cache
-    >>> cache.get('set!')
-    >>> cache.set('set!', 'this')
-    >>> cache.get('set!')
+    >>> cache.get('update!')
+    >>> cache.update('update!', 'this')
+    >>> cache.get('update!')
     'this'
-    >>> cache.set('set!', 'that')
-    >>> cache.get('set!')
+    >>> cache.update('update!', 'that')
+    >>> cache.get('update!')
     'that'
     """
     _set_log_lvl()
-    logger.debug('set({}, {})'.format(key, value))
+    logger.debug('update %s, %s', key, value)
     if not options.enabled:
         return
     _CACHE[key] = value
@@ -63,12 +63,12 @@ def get(key, default=None):
     >>> cache.get('get!')
     >>> cache.get('get!', 'default')
     'default'
-    >>> cache.set('get!', 'got')
+    >>> cache.update('get!', 'got')
     >>> cache.get('get!', 'default')
     'got'
     """
     _set_log_lvl()
-    logger.debug('get({}, default={})'.format(key, default))
+    logger.debug('get %s, default=%s', key, default)
     if has(key):
         return _CACHE[key]
     return default
@@ -78,8 +78,8 @@ def clear(key=None):
     """ Clear a cache entry, or the entire cache if no key is given
 
     >>> from minicache import cache
-    >>> cache.set('clear!', 'now')
-    >>> cache.set("don't!", 'yet')
+    >>> cache.update('clear!', 'now')
+    >>> cache.update("don't!", 'yet')
     >>> cache.has('clear!')
     True
     >>> cache.has("don't!")
@@ -94,7 +94,7 @@ def clear(key=None):
     False
     """
     _set_log_lvl()
-    logger.debug('clear({})'.format(key))
+    logger.debug('clear %s', key)
     if not options.enabled:
         return
     elif key is not None and key in _CACHE.keys():
@@ -124,7 +124,7 @@ def this(func):
     def func_wrapper(*args, **kwargs):
         _set_log_lvl()
         key = func.__name__ + str(args) + str(kwargs)
-        logger.debug('this({})'.format(key))
+        logger.debug('this %s' ,key)
 
         if has(key) and options.enabled:
             return get(key)
@@ -132,7 +132,7 @@ def this(func):
         value = func(*args, **kwargs)
 
         if options.enabled:
-            set(key, value)
+            update(key, value)
 
         return value
 
@@ -143,7 +143,7 @@ def disable(clear_cache=True):
     """ Disable the cache and clear its contents
 
     >>> from minicache import cache
-    >>> cache.set('disable!', 'me')
+    >>> cache.update('disable!', 'me')
     >>> cache.disable()
     >>> cache.has('disable!')
     False
@@ -152,7 +152,7 @@ def disable(clear_cache=True):
     False
     """
     _set_log_lvl()
-    logger.debug('disable clear_cache({})'.format(clear_cache))
+    logger.debug('disable clear_cache %s', clear_cache)
 
     if clear_cache:
         clear()
@@ -165,11 +165,11 @@ def enable():
 
     >>> from minicache import cache
     >>> cache.disable()
-    >>> cache.set('enable!', 'or not')
+    >>> cache.update('enable!', 'or not')
     >>> cache.has('enable!')
     False
     >>> cache.enable()
-    >>> cache.set('enable!', 'now')
+    >>> cache.update('enable!', 'now')
     >>> cache.has('enable!')
     True
     """
@@ -185,7 +185,7 @@ def temporarily_disabled():
 
     >>> from minicache import cache
     >>> with cache.temporarily_disabled():
-    ...     cache.set('temp', 'disable')
+    ...     cache.update('temp', 'disable')
     ...
     >>> cache.has('temp')
     False
@@ -203,7 +203,7 @@ def temporarily_enabled():
     >>> from minicache import cache
     >>> with cache.temporarily_disabled():
     ...     with cache.temporarily_enabled():
-    ...         cache.set('temp', 'disable')
+    ...         cache.update('temp', 'disable')
     ...
     >>> cache.has('temp')
     True
