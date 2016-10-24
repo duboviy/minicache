@@ -14,7 +14,7 @@ python:
 install: "pip install -r requirements_testing.txt"
 
 env:
-  - CODACY_PROJECT_TOKEN=24c36ea73f484f84adba8789e57d26b8
+  - CODACY_PROJECT_TOKEN=b9b5af680cd54e1498c8c0ccbc2b4895
 
 # command to run tests
 script: nosetests --with-coverage --cover-package=minicache tests/
