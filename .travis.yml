@@ -1,0 +1,24 @@
+language: python
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+
+#  # does not have headers provided, please ask https://launchpad.net/~pypy/+archive/ppa
+#  # maintainers to fix their pypy-dev package.
+  - "pypy"
+
+# command to install dependencies
+install: "pip install -r requirements_testing.txt"
+
+env:
+  - CODACY_PROJECT_TOKEN=24c36ea73f484f84adba8789e57d26b8
+
+# command to run tests
+script: nosetests --with-coverage --cover-package=minicache tests/
+
+after_success:
+  - coverage xml
+  - python-codacy-coverage -v -r coverage.xml

@@ -1,0 +1,11 @@
+-e .
+
+# testing requirements
+pytest==2.8.7
+pytest-cov==2.2.1
+flake8==2.5.4
+
+###### Requirements without Version Specifiers ######
+nose
+coverage
+codacy-coverage

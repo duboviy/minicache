@@ -1,0 +1,13 @@
+strictness: medium
+autodetect: yes
+
+pylint:
+  disable:
+    # W0612: Unused variable %r
+    - W0612
+    # W0613: Unused argument %r
+    - W0613
+    # W0212: Access to protected method
+    - W0212
+    # W0104: Statement has no effect
+    - W0104
