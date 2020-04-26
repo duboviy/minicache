@@ -4,7 +4,10 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
-  - "3.5-dev" # 3.5 development branch
+  - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.9"
 
 #  # does not have headers provided, please ask https://launchpad.net/~pypy/+archive/ppa
 #  # maintainers to fix their pypy-dev package.
