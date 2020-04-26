@@ -1,0 +1,15 @@
+[tool.black]
+line-length = 79
+skip-string-normalization = true
+skip-numeric-underscore-normalization = true
+include = '\.pyi?$'
+exclude = '''
+/(
+  \.eggs
+  | \.git
+  | \.venv
+  |   venv
+  | \.idea
+  | \.vscode
+)/
+'''
